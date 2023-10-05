@@ -17,29 +17,29 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        console.log('Computer Wins!');
-    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        console.log('Player Wins!');
-    } else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
-        console.log('Tie Game!');
-    } else if (playerSelection === 'rock' && computerSelection === 'rock') {
-        console.log('Tie Game!');
-    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        console.log('Computer Wins!');
-    } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        console.log('Player Wins!');
-    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        console.log('Player Wins!');
-    } else if (playerSelection === 'paper' && computerSelection === 'paper') {
-        console.log('Tie Game!');
-    } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        console.log('Computer Wins!');
+    switch (true) {
+        case playerSelection === 'scissors' && computerSelection === 'rock':
+            return 'Computer Wins!';
+        case playerSelection === 'scissors' && computerSelection === 'paper':
+            return 'Player Wins!';
+        case playerSelection === 'scissors' && computerSelection === 'scissors':
+            return 'Tie Game!';
+        case playerSelection === 'rock' && computerSelection === 'rock':
+            return 'Tie Game!';
+        case playerSelection === 'rock' && computerSelection === 'paper':
+            return 'Computer Wins!';
+        case playerSelection === 'rock' && computerSelection === 'scissors':
+            return 'Player Wins!';
+        case playerSelection === 'paper' && computerSelection === 'rock':
+            return 'Player Wins!';
+        case playerSelection === 'paper' && computerSelection === 'paper':
+            return 'Tie Game!';
+        case playerSelection === 'paper' && computerSelection === 'scissors':
+            return 'Computer Wins!';
     }
-    console.log(playerSelection, computerSelection);
 }
 
 const playerSelection = prompt("Choose rock, paper, or scissors!");
 const computerSelection = getComputerChoice();
 
-playRound();
+console.log(playRound(playerSelection,computerSelection));
