@@ -3,11 +3,12 @@ const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
 const buttons = document.querySelectorAll('button');
-let gameOver = 5;
+let gameOver = 0;
 let playerScore = 0;
 let playerScoreNum = document.querySelector('#player-score');
 let computerScore = 0;
 let computerScoreNum = document.querySelector('#computer-score');
+let text = document.querySelector('#text');
 let playerChoice;
 let computerChoice;
 
@@ -20,18 +21,24 @@ buttons.forEach(button => {
                 computerChoice = getComputerChoice();
                 console.log(playerChoice, computerChoice)
                 roundResults();
+                gameOver++;
+                gameIsOver();
             break;
             case paper:
                 playerChoice = 'paper';
                 computerChoice = getComputerChoice();
                 console.log(playerChoice, computerChoice)
                 roundResults();
+                gameOver++;
+                gameIsOver();
             break;
             case scissors:
                 playerChoice = 'scissors';
                 computerChoice = getComputerChoice();
                 console.log(playerChoice, computerChoice)
                 roundResults();
+                gameOver++;
+                gameIsOver();
             break;
         }
     });
@@ -62,18 +69,36 @@ function roundResults() {
         playerChoice === 'rock' && computerChoice === 'rock' || 
         playerChoice === 'paper' && computerChoice === 'paper' || 
         playerChoice === 'scissors' && computerChoice === 'scissors') {
-           results.textContent = 'Tie Game!';
+           text.textContent = 'Tie Game!';
     } else if (
         playerChoice === 'rock' && computerChoice === 'scissors' || 
         playerChoice === 'paper' && computerChoice === 'rock' || 
         playerChoice === 'scissors' && computerChoice === 'paper') {
            playerScore++;
-           results.textContent = 'Player Wins!';
+           playerScoreNum.textContent = playerScore;
+           text.textContent = 'Player Wins!';
     } else if (
         playerChoice === 'rock' && computerChoice === 'paper' || 
         playerChoice === 'paper' && computerChoice === 'scissors' || 
         playerChoice === 'scissors' && computerChoice === 'rock') {
            computerScore++;
-           results.textContent = 'Computer Wins';
+           computerScoreNum.textContent = computerScore;
+           text.textContent = 'Computer Wins';
+    }
+}
+
+// game end
+function gameIsOver() {
+    if (gameOver === 5) {
+        if (playerScore > computerScore) {
+            text.textContent = 'Player is the Champion!';
+        } else if (playerScore < computerScore) {
+            text.textContent = 'Computer is the Champion!';
+        } else if (playerScore === computerScore) {
+            text.textContent = 'There is no Champion!';
+        }
+        buttons.forEach(button => {
+            button.style.display = 'none';
+        });
     }
 }
