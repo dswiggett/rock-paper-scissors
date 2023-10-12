@@ -1,3 +1,43 @@
+const results = document.querySelector('#results');
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const buttons = document.querySelectorAll('button');
+let gameOver = 5;
+let playerScore = 0;
+let playerScoreNum = document.querySelector('#player-score');
+let computerScore = 0;
+let computerScoreNum = document.querySelector('#computer-score');
+let playerChoice;
+let computerChoice;
+
+// player choice
+buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        switch (e.target) {
+            case rock:
+                playerChoice = 'rock';
+                computerChoice = getComputerChoice();
+                console.log(playerChoice, computerChoice)
+                roundResults();
+            break;
+            case paper:
+                playerChoice = 'paper';
+                computerChoice = getComputerChoice();
+                console.log(playerChoice, computerChoice)
+                roundResults();
+            break;
+            case scissors:
+                playerChoice = 'scissors';
+                computerChoice = getComputerChoice();
+                console.log(playerChoice, computerChoice)
+                roundResults();
+            break;
+        }
+    });
+});
+
+// computer choice
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 9) + 1;
     switch (choice) {
@@ -16,36 +56,24 @@ function getComputerChoice() {
     };
 }
 
-function playRound(playerSelection, computerSelection) {
-    switch (true) {
-        case playerSelection === 'scissors' && computerSelection === 'rock':
-            return 'Computer Wins!';
-        case playerSelection === 'scissors' && computerSelection === 'paper':
-            return 'Player Wins!';
-        case playerSelection === 'scissors' && computerSelection === 'scissors':
-            return 'Tie Game!';
-        case playerSelection === 'rock' && computerSelection === 'rock':
-            return 'Tie Game!';
-        case playerSelection === 'rock' && computerSelection === 'paper':
-            return 'Computer Wins!';
-        case playerSelection === 'rock' && computerSelection === 'scissors':
-            return 'Player Wins!';
-        case playerSelection === 'paper' && computerSelection === 'rock':
-            return 'Player Wins!';
-        case playerSelection === 'paper' && computerSelection === 'paper':
-            return 'Tie Game!';
-        case playerSelection === 'paper' && computerSelection === 'scissors':
-            return 'Computer Wins!';
+// results
+function roundResults() {
+    if (
+        playerChoice === 'rock' && computerChoice === 'rock' || 
+        playerChoice === 'paper' && computerChoice === 'paper' || 
+        playerChoice === 'scissors' && computerChoice === 'scissors') {
+           results.textContent = 'Tie Game!';
+    } else if (
+        playerChoice === 'rock' && computerChoice === 'scissors' || 
+        playerChoice === 'paper' && computerChoice === 'rock' || 
+        playerChoice === 'scissors' && computerChoice === 'paper') {
+           playerScore++;
+           results.textContent = 'Player Wins!';
+    } else if (
+        playerChoice === 'rock' && computerChoice === 'paper' || 
+        playerChoice === 'paper' && computerChoice === 'scissors' || 
+        playerChoice === 'scissors' && computerChoice === 'rock') {
+           computerScore++;
+           results.textContent = 'Computer Wins';
     }
 }
-
-function game() {
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Choose rock, paper, or scissors!");
-        const computerSelection = getComputerChoice();
-        
-        console.log(playRound(playerSelection, computerSelection));
-    }
-}
-
-game();
