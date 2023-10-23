@@ -3,6 +3,7 @@ const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
 const buttons = document.querySelectorAll('button');
+const playAgain = document.querySelector('#play-again');
 let gameOver = 0;
 let playerScore = 0;
 let playerScoreNum = document.querySelector('#player-score');
@@ -99,6 +100,12 @@ function gameIsOver() {
         }
         buttons.forEach(button => {
             button.style.display = 'none';
+            playAgain.style.display = 'block';
         });
     }
 }
+
+// play again function
+playAgain.addEventListener('click', () => {
+    location.reload();
+});
